@@ -9,6 +9,10 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Categoria from './Categoria'
 import Alergeno from './Alergeno'
+import {
+  ResponsiveAttachmentContract,
+  responsiveAttachment,
+} from '@ioc:Adonis/Addons/ResponsiveAttachment'
 
 export default class Producto extends BaseModel {
   @column({ isPrimary: true })
@@ -31,6 +35,18 @@ export default class Producto extends BaseModel {
 
   @column()
   public categoriaId: number
+
+  @responsiveAttachment({
+    folder: 'productos',
+    forceFormat: 'webp',
+    preComputeUrls: true,
+    breakpoints: {
+      large: 1000,
+      medium: 750,
+      small: 500,
+    },
+  })
+  public imagen: ResponsiveAttachmentContract | null
 
   @belongsTo(() => Categoria)
   public categoria: BelongsTo<typeof Categoria>

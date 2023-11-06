@@ -20,7 +20,10 @@
   "providers": [
     "./providers/AppProvider",
     "@adonisjs/core",
-    "@adonisjs/lucid"
+    "@adonisjs/lucid",
+    "@adonisjs/attachment-lite",
+    "@adonisjs/drive-s3",
+    "adonis-responsive-attachment"
   ],
   "aceProviders": [
     "@adonisjs/repl"
