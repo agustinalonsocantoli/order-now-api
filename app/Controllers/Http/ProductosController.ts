@@ -73,7 +73,6 @@ export default class ProductosController {
       const producto = await Producto.findOrFail(id)
       const imagen = request.file('imagen')!
       const borraImagen = request.input('borraImagen')
-
       const validatedData = await request.validate(UpdateProductoValidator)
 
       producto.merge(validatedData)
@@ -81,7 +80,7 @@ export default class ProductosController {
       if (imagen) {
         producto.imagen = await ResponsiveAttachment.fromFile(imagen)
       } else {
-        if (borraImagen === null && borraImagen !== undefined) producto.imagen = null
+        if (borraImagen) producto.imagen = null
       }
 
       if (validatedData.alergenos) {

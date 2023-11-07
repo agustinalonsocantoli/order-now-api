@@ -5,10 +5,10 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
 
-      table.integer('producto_id').unsigned().references('productos.id').index().onDelete('CASCADE')
-      table.integer('alergeno_id').unsigned().references('alergenos.id').index().onDelete('CASCADE')
+      table.uuid('producto_id').references('id').inTable('productos').onDelete('CASCADE').index()
+      table.uuid('alergeno_id').references('id').inTable('alergenos').onDelete('CASCADE').index()
       table.unique(['producto_id', 'alergeno_id'])
 
       table.timestamp('created_at', { useTz: true })

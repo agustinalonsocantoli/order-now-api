@@ -16,7 +16,7 @@ import {
 
 export default class Producto extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: string
 
   @column()
   public nombre: string
@@ -34,16 +34,17 @@ export default class Producto extends BaseModel {
   public descripcion: string
 
   @column()
-  public categoriaId: number
+  public categoriaId: string
 
   @responsiveAttachment({
     folder: 'productos',
     forceFormat: 'webp',
     preComputeUrls: true,
+    disableThumbnail: true,
     breakpoints: {
-      large: 1000,
-      medium: 750,
-      small: 500,
+      large: 'off',
+      medium: 350,
+      small: 100,
     },
   })
   public imagen: ResponsiveAttachmentContract | null

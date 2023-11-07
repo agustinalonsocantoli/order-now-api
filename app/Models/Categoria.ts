@@ -4,7 +4,7 @@ import Producto from './Producto'
 
 export default class Categoria extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: string
 
   @column()
   public nombre: string

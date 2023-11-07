@@ -10,8 +10,8 @@ export default class CreateProductoValidator {
     orden: schema.number(),
     precio: schema.number(),
     descripcion: schema.string.optional(),
-    categoriaId: schema.number([rules.exists({ table: 'categorias', column: 'id' })]),
-    alergenos: schema.array.optional().members(schema.number()),
+    categoriaId: schema.string([rules.uuid(), rules.exists({ table: 'categorias', column: 'id' })]),
+    alergenos: schema.array.optional().members(schema.string()),
   })
 
   public messages = {}

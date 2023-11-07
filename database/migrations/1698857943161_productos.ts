@@ -5,13 +5,14 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.string('nombre').notNullable().unique()
       table.boolean('publicado')
       table.integer('orden').notNullable()
       table.decimal('precio').notNullable()
       table.text('descripcion')
-      table.integer('categoria_id').references('categorias.id').unsigned().index()
+      table.json('imagen')
+      table.uuid('categoria_id').references('id').inTable('categorias').onDelete('CASCADE').index()
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
